@@ -45,11 +45,30 @@ The KR260 communicates with the server over:
 ## Ubuntu PC
 
 ```bash
+sudo apt-get update
 chmod +x setup_ntp_server.sh
 ./setup_ntp_server.sh
 ```
 
 Select the Ethernet interface connected to the KR260.
+
+---
+
+## Cleanup scripts
+
+Two helper scripts are included to undo the setup if needed. They remove the installed NTP-related configuration and packages, and restore any backups created by the setup scripts.
+
+- `cleanup_ntp_server.sh`: Run on the Ubuntu PC to revert the `chrony` installation and restore backed-up configuration.
+- `cleanup_ntp_client.sh`: Run on the KR260 to revert `systemd-timesyncd` changes and restore backed-up client settings.
+
+Make both scripts executable before running:
+
+```bash
+chmod +x cleanup_ntp_server.sh
+chmod +x cleanup_ntp_client.sh
+./cleanup_ntp_server.sh   # on Ubuntu PC
+./cleanup_ntp_client.sh   # on KR260
+```
 
 ---
 
